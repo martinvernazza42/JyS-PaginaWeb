@@ -1,0 +1,638 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Agency - Start Bootstrap Theme</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'agency/assets/favicon.ico' %}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'agency/css/styles.css' %}?v=8" rel="stylesheet" />
+        <style>
+            /* Navbar transparente al inicio */
+            #mainNav {
+                background-color: transparent !important;
+                transition: background-color 0.3s ease;
+            }
+            
+            /* Logo más grande */
+            .navbar-brand img {
+                height: 60px !important;
+                width: auto !important;
+            }
+            
+            /* Navbar bordo al hacer scroll */
+            #mainNav.navbar-shrink {
+                background-color: #843044 !important;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+            }
+        </style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top"><img src="{% static 'agency/assets/img/navbar-jys.png' %}" alt="..." /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#page-top">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#cursos">Cursos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#examenes">Exámenes Internacionales</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <video autoplay muted loop playsinline preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: contrast(1.1) brightness(1.05);">
+                <source src="{% static 'agency/assets/img/header-video.mp4' %}" type="video/mp4">
+            </video>
+            <div class="container" style="margin-top: 18rem;">
+                <div class="masthead-heading text-uppercase" style="background: none; padding: 0;">Tu camino hacia el inglés comienza aquí</div>
+                <a class="btn btn-xl text-uppercase" href="#nosotros" style="background-color: #843044; border-color: #843044; color: white;">Conoce Más</a>
+            </div>
+        </header>
+        <!-- Nosotros-->
+        <section class="page-section" id="nosotros">
+            <div class="container">
+                <div class="text-center">
+                    <div style="position: relative; display: inline-block; margin-bottom: 20px;">
+                        <h2 class="section-heading text-uppercase">Quiénes Somos</h2>
+                        <svg style="position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 280px; height: 20px;" viewBox="0 0 280 20">
+                            <path d="M10,15 Q70,5 140,12 Q210,18 270,8" stroke="#FFD54F" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
+                            <path d="M15,12 Q75,8 145,15 Q215,20 265,10" stroke="#FFD54F" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3 class="section-subheading text-muted">Conoce nuestra historia y valores.</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <span class="fa-stack fa-4x">
+                                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fas fa-history fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <h4 class="my-3">Nuestra historia</h4>
+                                <p class="text-muted">Desde 2013 acompañamos a estudiantes de todas las edades en su camino hacia el dominio del inglés, con más de una década de experiencia en enseñanza de calidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <span class="fa-stack fa-4x">
+                                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fas fa-bullseye fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <h4 class="my-3">Misión y visión</h4>
+                                <p class="text-muted">Nuestra misión es enseñar inglés en contexto, de forma práctica y natural. Buscamos que nuestros alumnos desarrollen confianza y alcancen certificaciones internacionales que impulsen su crecimiento académico y profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <span class="fa-stack fa-4x">
+                                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                    <i class="fas fa-heart fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <h4 class="my-3">Valores</h4>
+                                <p class="text-muted">Valoramos el respeto por los tiempos de cada estudiante, la participación activa y el acompañamiento constante. Nuestro equipo docente asegura una enseñanza personalizada, motivadora y adaptada a cada necesidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Cursos-->
+        <section class="page-section" id="cursos" style="background: linear-gradient(135deg, #FFFBF0 0%, #F5E6A3 50%, #FFFBF0 100%); position: relative; overflow: hidden;">
+            <!-- Decoraciones de fondo -->
+            <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.4;" viewBox="0 0 1200 800">
+                <!-- Definir filtros para sombras -->
+                <defs>
+                    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="rgba(0,0,0,0.3)"/>
+                    </filter>
+                </defs>
+                
+                <!-- Líneas curvas discontinuas en negro con sombra -->
+                <path d="M0,200 Q150,150 300,200 Q450,250 600,200" stroke="#000000" stroke-width="5" fill="none" stroke-dasharray="10,5" opacity="1" filter="url(#shadow)"/>
+                <path d="M600,200 Q750,150 900,200 Q1050,250 1200,200" stroke="#000000" stroke-width="4" fill="none" stroke-dasharray="8,4" opacity="0.95" filter="url(#shadow)"/>
+                <path d="M0,500 Q200,450 400,500 Q600,550 800,500" stroke="#000000" stroke-width="4" fill="none" stroke-dasharray="12,6" opacity="0.95" filter="url(#shadow)"/>
+                <path d="M800,500 Q950,450 1100,500 Q1150,525 1200,500" stroke="#000000" stroke-width="5" fill="none" stroke-dasharray="6,3" opacity="0.9" filter="url(#shadow)"/>
+                
+                <!-- Pequeñas flechas en negro con sombra -->
+                <g opacity="1" filter="url(#shadow)">
+                    <polygon points="150,120 160,110 170,120 160,130" fill="#000000"/>
+                    <polygon points="350,350 340,340 350,330 360,340" fill="#000000"/>
+                    <polygon points="650,180 660,170 670,180 660,190" fill="#000000"/>
+                    <polygon points="950,420 940,410 950,400 960,410" fill="#000000"/>
+                    <polygon points="250,650 260,640 270,650 260,660" fill="#000000"/>
+                    <polygon points="850,280 840,270 850,260 860,270" fill="#000000"/>
+                </g>
+                
+                <!-- Tazas de té minimalistas en negro con sombra -->
+                <g opacity="0.9" filter="url(#shadow)">
+                    <!-- Taza 1 -->
+                    <ellipse cx="200" cy="300" rx="12" ry="8" fill="none" stroke="#000000" stroke-width="4"/>
+                    <path d="M212,300 Q220,300 220,308 Q220,316 212,316" fill="none" stroke="#000000" stroke-width="3"/>
+                    <line x1="188" y1="292" x2="212" y2="292" stroke="#000000" stroke-width="3"/>
+                    
+                    <!-- Taza 2 -->
+                    <ellipse cx="800" cy="600" rx="10" ry="6" fill="none" stroke="#000000" stroke-width="4"/>
+                    <path d="M810,600 Q816,600 816,606 Q816,612 810,612" fill="none" stroke="#000000" stroke-width="3"/>
+                    <line x1="790" y1="594" x2="810" y2="594" stroke="#000000" stroke-width="3"/>
+                    
+                    <!-- Taza 3 -->
+                    <ellipse cx="1000" cy="150" rx="11" ry="7" fill="none" stroke="#000000" stroke-width="4"/>
+                    <path d="M1011,150 Q1018,150 1018,157 Q1018,164 1011,164" fill="none" stroke="#000000" stroke-width="3"/>
+                    <line x1="989" y1="143" x2="1011" y2="143" stroke="#000000" stroke-width="3"/>
+                </g>
+                
+                <!-- Círculos y formas geométricas en negro con sombra -->
+                <circle cx="100" cy="150" r="20" fill="#000000" opacity="0.7" filter="url(#shadow)"/>
+                <circle cx="500" cy="400" r="25" fill="#000000" opacity="0.6" filter="url(#shadow)"/>
+                <circle cx="1100" cy="350" r="18" fill="#000000" opacity="0.8" filter="url(#shadow)"/>
+                <circle cx="300" cy="700" r="22" fill="#000000" opacity="0.65" filter="url(#shadow)"/>
+                
+                <!-- Formas geométricas modernas en negro con sombra -->
+                <rect x="400" y="100" width="15" height="15" fill="#000000" opacity="0.85" rx="3" filter="url(#shadow)"/>
+                <rect x="750" y="450" width="12" height="12" fill="#000000" opacity="0.8" rx="2" transform="rotate(45 756 456)" filter="url(#shadow)"/>
+                <rect x="150" y="550" width="18" height="18" fill="#000000" opacity="0.8" rx="4" transform="rotate(30 159 559)" filter="url(#shadow)"/>
+                
+                <!-- Elementos educativos adicionales en negro con sombra -->
+                <g opacity="0.85" filter="url(#shadow)">
+                    <!-- Libro abierto minimalista -->
+                    <path d="M600,100 L620,100 L620,120 L610,115 L600,120 Z" fill="#000000"/>
+                    <line x1="610" y1="100" x2="610" y2="115" stroke="#000000" stroke-width="3"/>
+                    
+                    <!-- Lápiz simple -->
+                    <rect x="450" y="650" width="5" height="20" fill="#000000"/>
+                    <polygon points="450,650 455,650 452.5,645" fill="#000000"/>
+                </g>
+            </svg>
+            <div class="container" style="position: relative; z-index: 2;">
+                <div class="text-center">
+                    <div style="position: relative; display: inline-block; margin-bottom: 20px;">
+                        <h2 class="section-heading text-uppercase">Nuestros Cursos</h2>
+                        <svg style="position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 320px; height: 20px;" viewBox="0 0 320 20">
+                            <path d="M15,12 Q80,6 160,14 Q240,18 305,9" stroke="#FFD54F" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.9"/>
+                            <path d="M20,15 Q85,8 165,16 Q245,20 300,11" stroke="#FFD54F" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+                            <path d="M25,10 Q90,12 170,11 Q250,15 295,13" stroke="#FFD54F" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="section-subheading text-muted">Programas adaptados a cada edad y necesidad.</h3>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/1.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                            <div class="card-body p-3">
+                                <h6 class="card-title">Cursos para Niños (Kids English)</h6>
+                                <p class="card-text text-muted small mb-2"><strong>Edad:</strong> desde los 5 años<br>
+                                <strong>Modalidad:</strong> Presencial / Online<br>
+                                <strong>Grupos:</strong> 8-9 alumnos</p>
+                                <p class="card-text small">Clases dinámicas con juegos, canciones y actividades que estimulan el aprendizaje natural del idioma.</p>
+                                <a href="#contact" class="btn btn-primary btn-sm">Descubrí cómo aprenden jugando</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/2.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                            <div class="card-body p-3">
+                                <h6 class="card-title">Cursos para Adolescentes (Teens English)</h6>
+                                <p class="card-text text-muted small mb-2"><strong>Edad:</strong> de 12 a 17 años<br>
+                                <strong>Modalidad:</strong> Presencial / Online<br>
+                                <strong>Grupos:</strong> 8-9 alumnos</p>
+                                <p class="card-text small">Clases enfocadas en comunicación real, adaptadas a los intereses de los adolescentes.</p>
+                                <a href="#contact" class="btn btn-primary btn-sm">Inscribite y hablá inglés con confianza</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/3.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                            <div class="card-body p-3">
+                                <h6 class="card-title">Cursos para Adultos (Adults English)</h6>
+                                <p class="card-text text-muted small mb-2"><strong>Modalidad:</strong> Presencial / Online<br>
+                                <strong>Grupos:</strong> Reducidos (8-9 alumnos)</p>
+                                <p class="card-text small">Ideal para quienes desean retomar el inglés, viajar, o mejorar su desempeño profesional.</p>
+                                <a href="#contact" class="btn btn-primary btn-sm">Aprendé inglés útil para tu vida y trabajo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/4.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                            <div class="card-body p-3">
+                                <h6 class="card-title">Inglés para Empresas (Business English)</h6>
+                                <p class="card-text text-muted small mb-2"><strong>Modalidad:</strong> Presencial / Online</p>
+                                <p class="card-text small">Entrenamiento lingüístico personalizado para equipos de trabajo.</p>
+                                <a href="#contact" class="btn btn-primary btn-sm">Capacitá a tu equipo en inglés profesional</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/5.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                            <div class="card-body p-3">
+                                <h6 class="card-title">Cursos Intensivos</h6>
+                                <p class="card-text text-muted small mb-2"><strong>Duración:</strong> corta (1 a 3 meses)<br>
+                                <strong>Modalidad:</strong> Presencial / Online</p>
+                                <p class="card-text small">Programas acelerados para quienes necesitan resultados rápidos.</p>
+                                <a href="#contact" class="btn btn-primary btn-sm">Mejorá tu nivel en tiempo récord</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/6.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                            <div class="card-body p-3">
+                                <h6 class="card-title">Preparación para Exámenes Internacionales</h6>
+                                <p class="card-text text-muted small mb-2"><strong>Exámenes:</strong> Cambridge, TOEFL, IELTS, Trinity</p>
+                                <p class="card-text small">Clases enfocadas en estrategias de examen con alto porcentaje de aprobados.</p>
+                                <a href="#contact" class="btn btn-primary btn-sm">Preparate para certificar tu nivel de inglés</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio Modals-->
+        <!-- Cursos para Niños modal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{% static 'agency/assets/img/close-icon.svg' %}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Cursos para Niños (Kids English)</h2>
+                                    <p class="item-intro text-muted">Edad: desde los 5 años | Modalidad: Presencial / Online | Grupos: 8-9 alumnos</p>
+                                    <img class="img-fluid d-block mx-auto" src="{% static 'agency/assets/img/portfolio/1.jpg' %}" alt="..." />
+                                    <p><strong>Descripción:</strong> Clases dinámicas con juegos, canciones, lecturas y actividades que estimulan el aprendizaje natural del idioma.</p>
+                                    <p><strong>Objetivo:</strong> Desarrollar comprensión auditiva, pronunciación y vocabulario desde temprana edad.</p>
+                                    <p><strong>Metodología:</strong> Aprendizaje a través del juego, expresión oral y actividades interactivas.</p>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        Descubrí cómo aprenden jugando
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cursos para Adolescentes modal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{% static 'agency/assets/img/close-icon.svg' %}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Cursos para Adolescentes (Teens English)</h2>
+                                    <p class="item-intro text-muted">Edad: de 12 a 17 años | Modalidad: Presencial / Online | Grupos: 8-9 alumnos</p>
+                                    <img class="img-fluid d-block mx-auto" src="{% static 'agency/assets/img/portfolio/2.jpg' %}" alt="..." />
+                                    <p><strong>Descripción:</strong> Clases enfocadas en comunicación real, comprensión lectora y expresión oral, adaptadas a los intereses de los adolescentes.</p>
+                                    <p><strong>Objetivo:</strong> preparar a los alumnos para exámenes internacionales y para comunicarse con fluidez.</p>
+                                    <p><strong>Metodología:</strong> proyectos grupales, debates, actividades audiovisuales y simulaciones reales.</p>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        💬 Inscribite y hablá inglés con confianza
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cursos para Adultos modal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{% static 'agency/assets/img/close-icon.svg' %}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Cursos para Adultos (Adults English)</h2>
+                                    <p class="item-intro text-muted">Modalidad: Presencial / Online | Grupos: reducidos (8-9 alumnos)</p>
+                                    <img class="img-fluid d-block mx-auto" src="{% static 'agency/assets/img/portfolio/3.jpg' %}" alt="..." />
+                                    <p><strong>Descripción:</strong> Ideal para quienes desean retomar el inglés, viajar, o mejorar su desempeño profesional.</p>
+                                    <p><strong>Objetivo:</strong> adquirir soltura para comunicarse en contextos laborales, académicos o sociales.</p>
+                                    <p><strong>Metodología:</strong> clases prácticas, simulaciones de conversaciones reales, enfoque comunicativo y materiales adaptados a cada nivel.</p>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        Aprendé inglés útil para tu vida y trabajo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Inglés para Empresas modal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{% static 'agency/assets/img/close-icon.svg' %}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Inglés para Empresas (Business English)</h2>
+                                    <p class="item-intro text-muted">Modalidad: Presencial en empresa / Online</p>
+                                    <img class="img-fluid d-block mx-auto" src="{% static 'agency/assets/img/portfolio/4.jpg' %}" alt="..." />
+                                    <p><strong>Descripción:</strong> Entrenamiento lingüístico personalizado para equipos de trabajo.</p>
+                                    <p><strong>Objetivo:</strong> mejorar la comunicación profesional, presentaciones, reuniones y redacción de correos o informes.</p>
+                                    <p><strong>Incluye:</strong> materiales adaptados a cada rubro y flexibilidad horaria.</p>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        📈 Capacitá a tu equipo en inglés profesional
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cursos Intensivos modal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{% static 'agency/assets/img/close-icon.svg' %}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Cursos Intensivos</h2>
+                                    <p class="item-intro text-muted">Duración: Corta (1 a 3 meses) | Modalidad: Presencial / Online</p>
+                                    <img class="img-fluid d-block mx-auto" src="{% static 'agency/assets/img/portfolio/5.jpg' %}" alt="..." />
+                                    <p><strong>Descripción:</strong> Programas acelerados para quienes necesitan resultados rápidos, ideal para viajes, entrevistas laborales o rendir un examen.</p>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        Mejorá tu nivel en tiempo récord
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Preparación Exámenes modal-->
+        <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="{% static 'agency/assets/img/close-icon.svg' %}" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="modal-body">
+                                    <h2 class="text-uppercase">Preparación para Exámenes Internacionales</h2>
+                                    <p class="item-intro text-muted">Exámenes: Cambridge, TOEFL, IELTS, Trinity</p>
+                                    <img class="img-fluid d-block mx-auto" src="{% static 'agency/assets/img/portfolio/6.jpg' %}" alt="..." />
+                                    <p><strong>Descripción:</strong> Clases enfocadas en estrategias de examen, práctica de listening, speaking, reading y writing.</p>
+                                    <p><strong>Beneficios:</strong> alto porcentaje de aprobados y acompañamiento personalizado.</p>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        🎯 Preparate para certificar tu nivel de inglés
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Exámenes Internacionales-->
+        <section class="page-section" id="examenes">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div style="position: relative; display: inline-block; margin-bottom: 25px;">
+                        <h2 class="section-heading text-uppercase mb-4">Certificá tu inglés con reconocimiento internacional</h2>
+                        <svg style="position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 450px; height: 25px;" viewBox="0 0 450 25">
+                            <path d="M20,18 Q112,8 225,15 Q337,22 430,12" stroke="#FFD54F" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+                            <path d="M25,20 Q117,10 230,17 Q342,24 425,14" stroke="#FFD54F" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+                            <path d="M30,15 Q122,12 235,14 Q347,19 420,16" stroke="#FFD54F" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    <h3 class="section-subheading text-muted mb-4">Exámenes con los que trabajamos</h3>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10">
+                            <p class="lead text-muted mb-4">En nuestra academia acompañamos a los estudiantes en la preparación de exámenes internacionales de inglés, brindando una formación completa, práctica y personalizada para cada nivel y objetivo.</p>
+                            <p class="text-muted mb-4">Preparamos para los principales exámenes internacionales reconocidos en todo el mundo:</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-graduation-cap fa-2x text-primary me-3"></i>
+                                    <h5 class="card-title mb-0">Cambridge English (KET, PET, FCE, CAE, CPE)</h5>
+                                </div>
+                                <p class="card-text text-muted">Ideales para certificar distintos niveles de dominio del idioma según el Marco Común Europeo (A2 a C2). Estos exámenes evalúan comprensión lectora, auditiva, escritura y expresión oral. Perfectos para estudiantes, docentes y profesionales que buscan una acreditación oficial y permanente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-globe-americas fa-2x text-primary me-3"></i>
+                                    <h5 class="card-title mb-0">TOEFL (Test of English as a Foreign Language)</h5>
+                                </div>
+                                <p class="card-text text-muted">Reconocido por universidades y empresas internacionales. Mide la capacidad para usar y comprender inglés académico en contextos reales. Ideal para quienes desean estudiar o trabajar en el exterior.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-award fa-2x text-primary me-3"></i>
+                                    <h5 class="card-title mb-0">IELTS (International English Language Testing System)</h5>
+                                </div>
+                                <p class="card-text text-muted">Evaluación global aceptada por más de 10.000 instituciones. Mide la comunicación en inglés en contextos académicos, laborales y migratorios. Disponible en versiones Academic y General Training.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-certificate fa-2x text-primary me-3"></i>
+                                    <h5 class="card-title mb-0">Trinity College London</h5>
+                                </div>
+                                <p class="card-text text-muted">Enfocado en comunicación oral y habilidades prácticas. Sus exámenes (GESE e ISE) priorizan la interacción y la expresión oral, siendo una excelente opción para quienes buscan confianza al hablar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Centros de Preparación y Examinación -->
+                <div class="row mt-5 justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <img src="{% static 'agency/assets/img/pruebatrinity.png' %}" alt="Cambridge y Trinity College London" class="img-fluid" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contacto-->
+        <section class="page-section" id="contact" style="background: linear-gradient(135deg, #FFFBF0 0%, #F5E6A3 50%, #FFFBF0 100%);">
+            <div class="container">
+                <div class="text-center">
+                    <div style="position: relative; display: inline-block; margin-bottom: 20px;">
+                        <h2 class="section-heading text-uppercase" style="color: #000;">Ubicación</h2>
+                        <svg style="position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 200px; height: 20px;" viewBox="0 0 200 20">
+                            <path d="M10,14 Q50,8 100,15 Q150,20 190,12" stroke="#FFD54F" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.8"/>
+                            <path d="M15,16 Q55,10 105,17 Q155,22 185,14" stroke="#FFD54F" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3 class="section-subheading text-muted">Encontranos en el corazón de la ciudad.</h3>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="bg-white p-4 rounded shadow-sm">
+                            <div class="map-container" style="height: 600px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.8234567890123!2d-59.0123456789!3d-27.4567890123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94456ca43a07f249%3A0x4027137c4b0532b1!2sBrown%20713%2C%20Resistencia%2C%20Chaco!5e0!3m2!1ses!2sar!4v1234567890123" 
+                                    width="100%" 
+                                    height="600" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-3 text-center">
+                                    <i class="fas fa-map-marker-alt fa-2x text-primary mb-2"></i>
+                                    <h5>Dirección</h5>
+                                    <p class="text-muted">Brown 713<br>Resistencia, Chaco</p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                                    <h5>Teléfono</h5>
+                                    <p class="text-muted">03624519226</p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                    <h5>Email</h5>
+                                    <p class="text-muted">englishlanguageoffice@gmail.com</p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                                    <h5>Horarios</h5>
+                                    <p class="text-muted">Lun-Jue: 15:00-20:30hs<br>Vie: 16:00-19:30hs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Información Adicional-->
+        <section class="page-section" id="info" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <div style="position: relative; display: inline-block; margin-bottom: 20px;">
+                        <h2 class="section-heading text-uppercase" style="color: #000;">Contáctanos</h2>
+                        <svg style="position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 280px; height: 20px;" viewBox="0 0 280 20">
+                            <path d="M10,15 Q70,5 140,12 Q210,18 270,8" stroke="#FFD54F" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.8"/>
+                            <path d="M15,12 Q75,8 145,15 Q215,20 265,10" stroke="#FFD54F" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3 class="section-subheading text-muted">Envianos tu consulta y te responderemos a la brevedad.</h3>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="bg-white p-5 rounded-3 shadow-lg">
+                            <form id="contactForm" method="post">
+                                {% csrf_token %}
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label fw-bold text-dark">Nombre completo *</label>
+                                        <input class="form-control form-control-lg border-2" id="name" name="name" type="text" placeholder="Ingresá tu nombre" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label fw-bold text-dark">Email *</label>
+                                        <input class="form-control form-control-lg border-2" id="email" name="email" type="email" placeholder="tu@email.com" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label fw-bold text-dark">Teléfono *</label>
+                                        <input class="form-control form-control-lg border-2" id="phone" name="phone" type="tel" placeholder="Tu número de teléfono" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="course" class="form-label fw-bold text-dark">Curso de interés</label>
+                                        <select class="form-select form-select-lg border-2" id="course" name="course" style="border-color: #dee2e6; border-radius: 10px;">
+                                            <option value="">Seleccioná un curso</option>
+                                            <option value="general">Consulta general</option>
+                                            <option value="kids">Cursos para Niños</option>
+                                            <option value="teens">Cursos para Adolescentes</option>
+                                            <option value="adults">Cursos para Adultos</option>
+                                            <option value="business">Inglés para Empresas</option>
+                                            <option value="intensive">Cursos Intensivos</option>
+                                            <option value="exams">Preparación Exámenes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="form-label fw-bold text-dark">Mensaje *</label>
+                                    <textarea class="form-control form-control-lg border-2" id="message" name="message" rows="5" placeholder="Contanos sobre tu consulta, nivel de inglés actual, objetivos, etc." required style="border-color: #dee2e6; border-radius: 10px; resize: vertical;"></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-lg px-5 py-3 text-uppercase fw-bold" type="submit" style="background-color: #843044; border-color: #843044; color: white; border-radius: 25px; box-shadow: 0 4px 15px rgba(132, 48, 68, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(132, 48, 68, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(132, 48, 68, 0.3)'">Enviar Consulta</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'agency/js/scripts.js' %}"></script>
+    </body>
+</html>
