@@ -10948,8 +10948,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  /* background-image: url("../assets/img/nuevo.jpg"); */
-  /* background: linear-gradient(135deg, #b8860b 0%, #daa520 50%, #b8860b 100%); */
+  background-image: url("../assets/img/nuevo.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
