@@ -52,6 +52,7 @@
                         <li class="nav-item"><a class="nav-link" href="#cursos">Cursos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#examenes">Exámenes Internacionales</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link btn btn-outline-light ms-2" href="{% url 'login' %}">Moodle</a></li>
                     </ul>
                 </div>
             </div>
@@ -498,10 +499,11 @@
                 </div>
             </div>
         </section>
-        <!-- Contacto-->
+        <!-- Contacto y Ubicación -->
         <section class="page-section" id="contact" style="background: linear-gradient(135deg, #FFFBF0 0%, #F5E6A3 50%, #FFFBF0 100%);">
             <div class="container">
-                <div class="text-center">
+                <!-- Ubicación -->
+                <div class="text-center mb-5">
                     <div style="position: relative; display: inline-block; margin-bottom: 20px;">
                         <h2 class="section-heading text-uppercase" style="color: #000;">Ubicación</h2>
                         <svg style="position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 200px; height: 20px;" viewBox="0 0 200 20">
@@ -511,51 +513,25 @@
                     </div>
                     <h3 class="section-subheading text-muted">Encontranos en el corazón de la ciudad.</h3>
                 </div>
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mb-5">
                     <div class="col-lg-10">
                         <div class="bg-white p-4 rounded shadow-sm">
-                            <div class="map-container" style="height: 600px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <div class="map-container" style="height: 400px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                                 <iframe 
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3539.8234567890123!2d-59.0123456789!3d-27.4567890123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94456ca43a07f249%3A0x4027137c4b0532b1!2sBrown%20713%2C%20Resistencia%2C%20Chaco!5e0!3m2!1ses!2sar!4v1234567890123" 
                                     width="100%" 
-                                    height="600" 
+                                    height="400" 
                                     style="border:0;" 
                                     allowfullscreen="" 
                                     loading="lazy" 
                                     referrerpolicy="no-referrer-when-downgrade">
                                 </iframe>
                             </div>
-                            <div class="row mt-4">
-                                <div class="col-md-3 text-center">
-                                    <i class="fas fa-map-marker-alt fa-2x text-primary mb-2"></i>
-                                    <h5>Dirección</h5>
-                                    <p class="text-muted">Brown 713<br>Resistencia, Chaco</p>
-                                </div>
-                                <div class="col-md-3 text-center">
-                                    <i class="fas fa-phone fa-2x text-primary mb-2"></i>
-                                    <h5>Teléfono</h5>
-                                    <p class="text-muted">03624519226</p>
-                                </div>
-                                <div class="col-md-3 text-center">
-                                    <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
-                                    <h5>Email</h5>
-                                    <p class="text-muted">englishlanguageoffice@gmail.com</p>
-                                </div>
-                                <div class="col-md-3 text-center">
-                                    <i class="fas fa-clock fa-2x text-primary mb-2"></i>
-                                    <h5>Horarios</h5>
-                                    <p class="text-muted">Lun-Jue: 15:00-20:30hs<br>Vie: 16:00-19:30hs</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Información Adicional-->
-        <section class="page-section" id="info" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-            <div class="container">
+                
+                <!-- Contáctanos -->
                 <div class="text-center mb-5">
                     <div style="position: relative; display: inline-block; margin-bottom: 20px;">
                         <h2 class="section-heading text-uppercase" style="color: #000;">Contáctanos</h2>
@@ -567,47 +543,83 @@
                     <h3 class="section-subheading text-muted">Envianos tu consulta y te responderemos a la brevedad.</h3>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="bg-white p-5 rounded-3 shadow-lg">
-                            <form id="contactForm" method="post">
-                                {% csrf_token %}
-                                <div class="row mb-4">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="name" class="form-label fw-bold text-dark">Nombre completo *</label>
-                                        <input class="form-control form-control-lg border-2" id="name" name="name" type="text" placeholder="Ingresá tu nombre" required style="border-color: #dee2e6; border-radius: 10px;" />
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <!-- Información de Contacto -->
+                            <div class="col-lg-4 mb-4">
+                                <div class="bg-white p-4 rounded-3 shadow-lg h-100">
+                                    <h4 class="mb-4 text-center" style="color: #843044;">Información de Contacto</h4>
+                                    
+                                    <div class="mb-4 text-center">
+                                        <i class="fas fa-map-marker-alt fa-2x text-primary mb-2"></i>
+                                        <h6>Dirección</h6>
+                                        <p class="text-muted">Brown 713<br>Resistencia, Chaco</p>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="email" class="form-label fw-bold text-dark">Email *</label>
-                                        <input class="form-control form-control-lg border-2" id="email" name="email" type="email" placeholder="tu@email.com" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                    
+                                    <div class="mb-4 text-center">
+                                        <i class="fas fa-phone fa-2x text-primary mb-2"></i>
+                                        <h6>Teléfono</h6>
+                                        <p class="text-muted">03624519226</p>
                                     </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="phone" class="form-label fw-bold text-dark">Teléfono *</label>
-                                        <input class="form-control form-control-lg border-2" id="phone" name="phone" type="tel" placeholder="Tu número de teléfono" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                    
+                                    <div class="mb-4 text-center">
+                                        <i class="fas fa-envelope fa-2x text-primary mb-2"></i>
+                                        <h6>Email</h6>
+                                        <p class="text-muted">englishlanguageoffice@gmail.com</p>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="course" class="form-label fw-bold text-dark">Curso de interés</label>
-                                        <select class="form-select form-select-lg border-2" id="course" name="course" style="border-color: #dee2e6; border-radius: 10px;">
-                                            <option value="">Seleccioná un curso</option>
-                                            <option value="general">Consulta general</option>
-                                            <option value="kids">Cursos para Niños</option>
-                                            <option value="teens">Cursos para Adolescentes</option>
-                                            <option value="adults">Cursos para Adultos</option>
-                                            <option value="business">Inglés para Empresas</option>
-                                            <option value="intensive">Cursos Intensivos</option>
-                                            <option value="exams">Preparación Exámenes</option>
-                                        </select>
+                                    
+                                    <div class="text-center">
+                                        <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                                        <h6>Horarios</h6>
+                                        <p class="text-muted">Lun-Jue: 15:00-20:30hs<br>Vie: 16:00-19:30hs</p>
                                     </div>
                                 </div>
-                                <div class="mb-4">
-                                    <label for="message" class="form-label fw-bold text-dark">Mensaje *</label>
-                                    <textarea class="form-control form-control-lg border-2" id="message" name="message" rows="5" placeholder="Contanos sobre tu consulta, nivel de inglés actual, objetivos, etc." required style="border-color: #dee2e6; border-radius: 10px; resize: vertical;"></textarea>
+                            </div>
+                            
+                            <!-- Formulario de Contacto -->
+                            <div class="col-lg-8">
+                                <div class="bg-white p-5 rounded-3 shadow-lg">
+                                    <form id="contactForm" method="post">
+                                        {% csrf_token %}
+                                        <div class="row mb-4">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name" class="form-label fw-bold text-dark">Nombre completo *</label>
+                                                <input class="form-control form-control-lg border-2" id="name" name="name" type="text" placeholder="Ingresá tu nombre" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="email" class="form-label fw-bold text-dark">Email *</label>
+                                                <input class="form-control form-control-lg border-2" id="email" name="email" type="email" placeholder="tu@email.com" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="phone" class="form-label fw-bold text-dark">Teléfono *</label>
+                                                <input class="form-control form-control-lg border-2" id="phone" name="phone" type="tel" placeholder="Tu número de teléfono" required style="border-color: #dee2e6; border-radius: 10px;" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="course" class="form-label fw-bold text-dark">Curso de interés</label>
+                                                <select class="form-select form-select-lg border-2" id="course" name="course" style="border-color: #dee2e6; border-radius: 10px;">
+                                                    <option value="">Seleccioná un curso</option>
+                                                    <option value="general">Consulta general</option>
+                                                    <option value="kids">Cursos para Niños</option>
+                                                    <option value="teens">Cursos para Adolescentes</option>
+                                                    <option value="adults">Cursos para Adultos</option>
+                                                    <option value="business">Inglés para Empresas</option>
+                                                    <option value="intensive">Cursos Intensivos</option>
+                                                    <option value="exams">Preparación Exámenes</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="message" class="form-label fw-bold text-dark">Mensaje *</label>
+                                            <textarea class="form-control form-control-lg border-2" id="message" name="message" rows="5" placeholder="Contanos sobre tu consulta, nivel de inglés actual, objetivos, etc." required style="border-color: #dee2e6; border-radius: 10px; resize: vertical;"></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <button class="btn btn-lg px-5 py-3 text-uppercase fw-bold" type="submit" style="background-color: #843044; border-color: #843044; color: white; border-radius: 25px; box-shadow: 0 4px 15px rgba(132, 48, 68, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(132, 48, 68, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(132, 48, 68, 0.3)'">Enviar Consulta</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="text-center">
-                                    <button class="btn btn-lg px-5 py-3 text-uppercase fw-bold" type="submit" style="background-color: #843044; border-color: #843044; color: white; border-radius: 25px; box-shadow: 0 4px 15px rgba(132, 48, 68, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(132, 48, 68, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(132, 48, 68, 0.3)'">Enviar Consulta</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

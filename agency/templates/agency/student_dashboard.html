@@ -1,0 +1,536 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Campus Virtual - JyS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #843044;
+            --accent-color: #FFD54F;
+            --bg-light: #F7F8FA;
+            --text-dark: #2C3E50;
+            --shadow-light: 0 2px 6px rgba(0,0,0,0.1);
+            --shadow-medium: 0 4px 12px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        .navbar-custom {
+            background: white;
+            border-bottom: 3px solid var(--primary-color);
+            box-shadow: var(--shadow-light);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        .btn-logout {
+            border: 2px solid var(--accent-color);
+            color: var(--primary-color);
+            background: white;
+            border-radius: 25px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .sidebar {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), #a64d61);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .nav-link-custom {
+            color: var(--text-dark);
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .nav-link-custom:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(4px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .nav-link-custom i {
+            margin-right: 0.75rem;
+            width: 20px;
+        }
+        
+        .main-content {
+            padding: 2rem 0;
+        }
+        
+        .welcome-card {
+            background: linear-gradient(135deg, var(--primary-color), #a64d61);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .content-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+        
+        .card-header-custom {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title-custom {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title-custom i {
+            margin-right: 0.75rem;
+            color: var(--accent-color);
+        }
+        
+        .material-item {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .material-item:hover {
+            background: #e9ecef;
+            transform: translateX(4px);
+        }
+        
+        .chip {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+        
+        .chip-apunte { background: #E3F2FD; color: #1976D2; }
+        .chip-video { background: #FCE4EC; color: #C2185B; }
+        .chip-audio { background: #F3E5F5; color: #7B1FA2; }
+        .chip-documento { background: #E8F5E8; color: #388E3C; }
+        
+        .aviso-card {
+            background: #FFF9E6;
+            border-left: 4px solid var(--accent-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .aviso-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .aviso-title i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        .status-presente {
+            background: #C8E6C9;
+            color: #2E7D32;
+        }
+        
+        .status-ausente {
+            background: #FFCDD2;
+            color: #C62828;
+        }
+        
+        .nota-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .nota-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #6c757d;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .main-content {
+                padding: 1rem 0;
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="{% static 'agency/assets/img/navbar-jys.png' %}" alt="JyS" style="height: 45px;" class="me-3">
+                Campus Virtual
+            </a>
+            <div class="navbar-nav ms-auto d-flex align-items-center">
+                <span class="navbar-text me-4">
+                    <i class="fas fa-bell text-warning me-2"></i>
+                    👋 Hola, <strong>{{ alumno.user.first_name }}</strong>
+                </span>
+                <a class="btn btn-logout" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt me-2"></i>Salir
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4">
+                <div class="sidebar fade-in">
+                    <div class="profile-section">
+                        <div class="profile-avatar">
+                            {{ alumno.user.first_name|first }}{{ alumno.user.last_name|first }}
+                        </div>
+                        <h5 class="mb-1">{{ alumno.user.first_name }} {{ alumno.user.last_name }}</h5>
+                        <p class="text-muted mb-1">DNI: {{ alumno.dni }}</p>
+                        <p class="text-muted mb-0">
+                            <i class="fas fa-graduation-cap me-1"></i>
+                            {{ alumno.curso|default:"Sin curso asignado" }}
+                        </p>
+                    </div>
+                    
+                    <nav class="nav flex-column">
+                        <a href="#materiales" class="nav-link-custom">
+                            <i class="fas fa-book"></i>Materiales de Estudio
+                        </a>
+                        <a href="#avisos" class="nav-link-custom">
+                            <i class="fas fa-bullhorn"></i>Avisos y Comunicados
+                        </a>
+                        <a href="#notas" class="nav-link-custom">
+                            <i class="fas fa-star"></i>Mis Calificaciones
+                        </a>
+                        <a href="#asistencias" class="nav-link-custom">
+                            <i class="fas fa-calendar-check"></i>Registro de Asistencias
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-9 col-md-8">
+                <div class="main-content">
+                    <!-- Welcome Card -->
+                    <div class="welcome-card fade-in">
+                        <h2 class="mb-3">¡Bienvenido a tu Campus Virtual! 🎓</h2>
+                        <p class="mb-0">
+                            Tienes <strong>{{ materiales.count }}</strong> materiales disponibles y 
+                            <strong>{{ avisos.count }}</strong> avisos nuevos en tu curso.
+                        </p>
+                    </div>
+
+                    <!-- Materiales -->
+                    <div class="content-card fade-in" id="materiales">
+                        <div class="card-header-custom">
+                            <h4 class="card-title-custom">
+                                <i class="fas fa-book"></i>Materiales de Estudio
+                            </h4>
+                        </div>
+                        {% for material in materiales %}
+                            <div class="material-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-2">{{ material.titulo }}</h6>
+                                        {% if material.descripcion %}
+                                            <p class="text-muted mb-2">{{ material.descripcion }}</p>
+                                        {% endif %}
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-1"></i>
+                                            Subido: {{ material.fecha_subida|date:"d/m/Y" }}
+                                        </small>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="chip chip-{{ material.tipo }}">{{ material.get_tipo_display }}</span>
+                                        <br>
+                                        <a href="{{ material.archivo.url }}" class="btn btn-sm btn-outline-primary mt-2" download>
+                                            <i class="fas fa-download me-1"></i>Descargar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="empty-state">
+                                <i class="fas fa-book-open"></i>
+                                <p>No hay materiales disponibles para tu curso.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Avisos -->
+                    <div class="content-card fade-in" id="avisos">
+                        <div class="card-header-custom">
+                            <h4 class="card-title-custom">
+                                <i class="fas fa-bullhorn"></i>Avisos y Comunicados
+                            </h4>
+                        </div>
+                        {% for aviso in avisos %}
+                            <div class="aviso-card">
+                                <h6 class="aviso-title">
+                                    <i class="fas fa-bullhorn"></i>{{ aviso.titulo }}
+                                </h6>
+                                <p class="mb-2">{{ aviso.contenido|linebreaks }}</p>
+                                <small class="text-muted">
+                                    <i class="fas fa-clock me-1"></i>
+                                    {{ aviso.fecha_publicacion|date:"d/m/Y H:i" }}
+                                </small>
+                            </div>
+                        {% empty %}
+                            <div class="empty-state">
+                                <i class="fas fa-bullhorn"></i>
+                                <p>No hay avisos nuevos.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row">
+                        <!-- Calificaciones -->
+                        <div class="col-lg-6">
+                            <div class="content-card fade-in" id="notas">
+                                <div class="card-header-custom">
+                                    <h4 class="card-title-custom">
+                                        <i class="fas fa-star"></i>Mis Calificaciones
+                                    </h4>
+                                </div>
+                                {% for nota in notas %}
+                                    <div class="nota-item">
+                                        <div>
+                                            <h6 class="mb-1">{{ nota.materia }}</h6>
+                                            <small class="text-muted">{{ nota.fecha|date:"d/m/Y" }}</small>
+                                            {% if nota.observaciones %}
+                                                <br><small class="text-muted">{{ nota.observaciones }}</small>
+                                            {% endif %}
+                                        </div>
+                                        <span class="nota-badge">{{ nota.calificacion }}</span>
+                                    </div>
+                                {% empty %}
+                                    <div class="empty-state">
+                                        <i class="fas fa-star"></i>
+                                        <p>No tienes calificaciones registradas.</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Asistencias -->
+                        <div class="col-lg-6">
+                            <div class="content-card fade-in" id="asistencias">
+                                <div class="card-header-custom">
+                                    <h4 class="card-title-custom">
+                                        <i class="fas fa-calendar-check"></i>Registro de Asistencias
+                                    </h4>
+                                </div>
+                                {% for asistencia in asistencias %}
+                                    <div class="d-flex justify-content-between align-items-center mb-3 p-3" style="background: #f8f9fa; border-radius: 12px;">
+                                        <div>
+                                            <h6 class="mb-1">{{ asistencia.fecha|date:"d/m/Y" }}</h6>
+                                            {% if asistencia.observaciones %}
+                                                <small class="text-muted">{{ asistencia.observaciones }}</small>
+                                            {% endif %}
+                                        </div>
+                                        {% if asistencia.presente %}
+                                            <span class="chip status-presente">
+                                                🟢 Presente
+                                            </span>
+                                        {% else %}
+                                            <span class="chip status-ausente">
+                                                🔴 Ausente
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                {% empty %}
+                                    <div class="empty-state">
+                                        <i class="fas fa-calendar-check"></i>
+                                        <p>No hay registros de asistencia.</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top mt-5 py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'agency/assets/img/navbar-jys.png' %}" alt="JyS" style="height: 30px;" class="me-3">
+                        <small class="text-muted">© 2024 JyS English Academy. Todos los derechos reservados.</small>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <small class="text-muted">
+                        <i class="fas fa-envelope me-1"></i>englishlanguageoffice@gmail.com
+                        <span class="mx-2">|</span>
+                        <i class="fas fa-phone me-1"></i>03624519226
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling para los enlaces del sidebar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación de entrada para las tarjetas
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
