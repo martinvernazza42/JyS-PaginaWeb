@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, RegexValidator
+from django.core.exceptions import ValidationError
+from .validators import validar_solo_letras, validar_email_gmail, validar_telefono_15_digitos
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=100)
@@ -10,12 +12,32 @@ class Curso(models.Model):
     def __str__(self):
         return self.nombre
 
+
+
 class Alumno(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dni = models.CharField(max_length=20, unique=True)
-    telefono = models.CharField(max_length=20, blank=True)
+    telefono = models.CharField(
+        max_length=15, 
+        validators=[validar_telefono_15_digitos],
+        blank=True
+    )
     curso = models.ForeignKey(Curso, on_delete=models.SET_NULL, null=True, blank=True)
     fecha_registro = models.DateTimeField(auto_now_add=True)
+    
+    def clean(self):
+        super().clean()
+        if self.user:
+            if self.user.first_name:
+                validar_solo_letras(self.user.first_name)
+            if self.user.last_name:
+                validar_solo_letras(self.user.last_name)
+            if self.user.email:
+                validar_email_gmail(self.user.email)
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} - {self.dni}"
