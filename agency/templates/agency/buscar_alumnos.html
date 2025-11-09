@@ -34,54 +34,56 @@
                     <div class="card-body">
                         <form method="get" class="mb-4">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" name="q" value="{{ query }}" placeholder="Buscar por DNI, nombre o apellido...">
+                                <input type="text" class="form-control form-control-lg" name="q" value="{{ query }}" placeholder="Filtrar por DNI, nombre o apellido...">
                                 <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search"></i> Buscar
+                                    <i class="fas fa-search"></i> Filtrar
                                 </button>
+                                {% if query %}
+                                    <a href="{% url 'buscar_alumnos' %}" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times"></i> Limpiar
+                                    </a>
+                                {% endif %}
                             </div>
                         </form>
 
                         {% if query %}
-                            <h5>Resultados para: "{{ query }}"</h5>
-                            <hr>
-                            
-                            {% if alumnos %}
-                                <div class="row">
-                                    {% for alumno in alumnos %}
-                                        <div class="col-md-6 col-lg-4 mb-3">
-                                            <div class="card h-100">
-                                                <div class="card-body">
-                                                    <h6 class="card-title">
-                                                        <a href="{% url 'gestionar_alumno' alumno.id %}" class="text-decoration-none">
-                                                            {{ alumno.user.first_name }} {{ alumno.user.last_name }}
-                                                        </a>
-                                                    </h6>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">DNI: {{ alumno.dni }}</small><br>
-                                                        <small class="text-muted">Email: {{ alumno.user.email|default:"No registrado" }}</small><br>
-                                                        <small class="text-muted">Teléfono: {{ alumno.telefono|default:"No registrado" }}</small>
-                                                    </p>
-                                                    <span class="badge bg-info">{{ alumno.curso|default:"Sin curso asignado" }}</span>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <a href="{% url 'gestionar_alumno' alumno.id %}" class="btn btn-sm btn-primary">
-                                                        <i class="fas fa-cog"></i> Gestionar
+                            <h5>Resultados para: "{{ query }}" ({{ alumnos.count }} encontrado{{ alumnos.count|pluralize }})</h5>
+                        {% else %}
+                            <h5>Todos los alumnos ({{ alumnos.count }} total{{ alumnos.count|pluralize:"es" }})</h5>
+                        {% endif %}
+                        <hr>
+                        
+                        {% if alumnos %}
+                            <div class="row">
+                                {% for alumno in alumnos %}
+                                    <div class="col-md-6 col-lg-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h6 class="card-title">
+                                                    <a href="{% url 'gestionar_alumno' alumno.id %}" class="text-decoration-none">
+                                                        {{ alumno.user.first_name }} {{ alumno.user.last_name }}
                                                     </a>
-                                                </div>
+                                                </h6>
+                                                <p class="card-text">
+                                                    <small class="text-muted">DNI: {{ alumno.dni }}</small><br>
+                                                    <small class="text-muted">Email: {{ alumno.user.email|default:"No registrado" }}</small><br>
+                                                    <small class="text-muted">Teléfono: {{ alumno.telefono|default:"No registrado" }}</small>
+                                                </p>
+                                                <span class="badge bg-info">{{ alumno.curso|default:"Sin curso asignado" }}</span>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a href="{% url 'gestionar_alumno' alumno.id %}" class="btn btn-sm btn-primary">
+                                                    <i class="fas fa-cog"></i> Gestionar
+                                                </a>
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle me-2"></i>
-                                    No se encontraron alumnos que coincidan con "{{ query }}"
-                                </div>
-                            {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
                         {% else %}
-                            <div class="text-center text-muted">
-                                <i class="fas fa-search fa-3x mb-3"></i>
-                                <p>Ingresa un DNI, nombre o apellido para buscar alumnos</p>
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                No se encontraron alumnos{% if query %} que coincidan con "{{ query }}"{% endif %}
                             </div>
                         {% endif %}
                     </div>

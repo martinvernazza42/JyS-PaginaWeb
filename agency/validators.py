@@ -11,10 +11,10 @@ def validar_solo_letras(value):
 
 def validar_telefono_15_digitos(value):
     """
-    Valida que el teléfono contenga exactamente 15 dígitos numéricos.
+    Valida que el teléfono contenga entre 10 y 15 dígitos numéricos.
     """
-    if not re.match(r'^\d{15}$', value):
-        raise ValidationError('El teléfono debe contener exactamente 15 números.')
+    if not re.match(r'^\d{10,15}$', value):
+        raise ValidationError('El teléfono debe contener entre 10 y 15 números.')
 
 def validar_email_gmail(value):
     """

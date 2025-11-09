@@ -30,7 +30,7 @@ class AlumnoForm(forms.ModelForm):
     telefono = forms.CharField(
         max_length=15,
         validators=[validar_telefono_15_digitos],
-        widget=forms.TextInput(attrs={'placeholder': '123456789012345'}),
+        widget=forms.TextInput(attrs={'placeholder': '1234567890'}),
         required=False
     )
     

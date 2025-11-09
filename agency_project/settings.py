@@ -75,3 +75,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'englishlanguageoffice@gmail.com'
+
+# Login settings
+LOGIN_URL = '/login/'

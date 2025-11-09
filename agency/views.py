@@ -148,25 +148,32 @@ def crear_alumno(request):
         email = request.POST.get('email')
         telefono = request.POST.get('telefono')
         
-        # Crear usuario
-        user = User.objects.create_user(
-            username=dni,
-            password=dni,
-            first_name=nombre,
-            last_name=apellido,
-            email=email
-        )
-        
-        # Crear alumno asignado al curso actual
-        alumno = Alumno.objects.create(
-            user=user,
-            dni=dni,
-            telefono=telefono,
-            curso=curso_actual
-        )
-        
-        messages.success(request, f'Alumno {nombre} {apellido} creado exitosamente en {curso_actual.nombre}')
-        return redirect('admin_dashboard')
+        # Verificar si ya existe un usuario con ese DNI
+        if User.objects.filter(username=dni).exists():
+            messages.error(request, f'Ya existe un alumno con el DNI {dni}')
+        else:
+            try:
+                # Crear usuario
+                user = User.objects.create_user(
+                    username=dni,
+                    password=dni,
+                    first_name=nombre,
+                    last_name=apellido,
+                    email=email
+                )
+                
+                # Crear alumno asignado al curso actual
+                alumno = Alumno.objects.create(
+                    user=user,
+                    dni=dni,
+                    telefono=telefono,
+                    curso=curso_actual
+                )
+                
+                messages.success(request, f'Alumno {nombre} {apellido} creado exitosamente en {curso_actual.nombre}')
+                return redirect('admin_dashboard')
+            except Exception as e:
+                messages.error(request, f'Error al crear alumno: {str(e)}')
     
     return render(request, 'agency/crear_alumno.html', {'curso_actual': curso_actual})
 
@@ -206,7 +213,7 @@ def gestionar_alumno(request, alumno_id):
         return redirect('seleccionar_curso')
     
     curso_actual = get_object_or_404(Curso, id=curso_id)
-    alumno = get_object_or_404(Alumno, id=alumno_id, curso=curso_actual)
+    alumno = get_object_or_404(Alumno, id=alumno_id)
     notas = Nota.objects.filter(alumno=alumno).order_by('-fecha')
     asistencias = []
     
@@ -217,6 +224,54 @@ def gestionar_alumno(request, alumno_id):
         'curso_actual': curso_actual,
     }
     return render(request, 'agency/gestionar_alumno.html', context)
+
+@login_required
+@user_passes_test(is_admin)
+def editar_alumno(request, alumno_id):
+    alumno = get_object_or_404(Alumno, id=alumno_id)
+    cursos = Curso.objects.all()
+    
+    if request.method == 'POST':
+        # Actualizar datos del usuario
+        alumno.user.first_name = request.POST.get('nombre')
+        alumno.user.last_name = request.POST.get('apellido')
+        alumno.user.email = request.POST.get('email')
+        
+        # Actualizar datos del alumno
+        alumno.dni = request.POST.get('dni')
+        alumno.telefono = request.POST.get('telefono')
+        curso_id = request.POST.get('curso')
+        if curso_id:
+            alumno.curso = get_object_or_404(Curso, id=curso_id)
+        else:
+            alumno.curso = None
+        
+        try:
+            alumno.user.save()
+            alumno.save()
+            messages.success(request, 'Datos del alumno actualizados exitosamente')
+            return redirect('gestionar_alumno', alumno_id=alumno.id)
+        except Exception as e:
+            messages.error(request, f'Error al actualizar: {str(e)}')
+    
+    context = {
+        'alumno': alumno,
+        'cursos': cursos,
+    }
+    return render(request, 'agency/editar_alumno.html', context)
+
+@login_required
+@user_passes_test(is_admin)
+def borrar_alumno(request, alumno_id):
+    alumno = get_object_or_404(Alumno, id=alumno_id)
+    
+    if request.method == 'POST':
+        nombre_completo = f"{alumno.user.first_name} {alumno.user.last_name}"
+        alumno.user.delete()  # Esto también borra el alumno por CASCADE
+        messages.success(request, f'Alumno {nombre_completo} eliminado exitosamente')
+        return redirect('admin_dashboard')
+    
+    return render(request, 'agency/confirmar_borrar_alumno.html', {'alumno': alumno})
 
 @login_required
 @user_passes_test(is_admin)
@@ -247,27 +302,20 @@ def agregar_nota(request, alumno_id):
 @login_required
 @user_passes_test(is_admin)
 def buscar_alumnos(request):
-    curso_id = request.session.get('curso_seleccionado')
-    if not curso_id:
-        return redirect('seleccionar_curso')
-    
-    curso_actual = get_object_or_404(Curso, id=curso_id)
     query = request.GET.get('q', '')
-    alumnos = []
     
     if query:
         alumnos = Alumno.objects.filter(
-            curso=curso_actual
-        ).filter(
             models.Q(dni__icontains=query) |
             models.Q(user__first_name__icontains=query) |
             models.Q(user__last_name__icontains=query)
         )
+    else:
+        alumnos = Alumno.objects.all()
     
     return render(request, 'agency/buscar_alumnos.html', {
         'alumnos': alumnos,
         'query': query,
-        'curso_actual': curso_actual
     })
 
 
