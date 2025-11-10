@@ -32,21 +32,31 @@ Mensaje:
 {message}
 """
         
+        # Enviar email en background para evitar timeout
         try:
-            # Enviar correo con timeout más corto
-            send_mail(
-                subject,
-                email_message,
-                settings.DEFAULT_FROM_EMAIL,
-                ['martinver163@gmail.com'],
-                fail_silently=True,  # No fallar si hay error
-            )
-            messages.success(request, '¡Mensaje enviado exitosamente! Te responderemos a la brevedad.')
-            return redirect('index')
-        except Exception as e:
-            # Siempre mostrar éxito para mejor UX
-            messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
-            return redirect('index')
+            from threading import Thread
+            
+            def send_email_async():
+                try:
+                    send_mail(
+                        subject,
+                        email_message,
+                        settings.DEFAULT_FROM_EMAIL,
+                        ['martinver163@gmail.com'],
+                        fail_silently=True,
+                    )
+                except:
+                    pass  # Fallar silenciosamente
+            
+            # Ejecutar en hilo separado
+            Thread(target=send_email_async, daemon=True).start()
+            
+        except:
+            pass  # Si falla el threading, continuar
+        
+        # Siempre mostrar éxito para mejor UX
+        messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
+        return redirect('index')
     
     return render(request, 'agency/index.html')
 
