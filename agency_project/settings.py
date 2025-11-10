@@ -2,11 +2,13 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+# Cargar .env.local primero (credenciales reales), luego .env (valores por defecto)
+load_dotenv('.env.local')
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-your-secret-key-here'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-development')
 
 DEBUG = True
 
@@ -80,15 +82,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email settings - Gmail con timeout optimizado
+# Email settings - Mailgun
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_TIMEOUT = 10  # Timeout de 10 segundos
-EMAIL_HOST_USER = os.environ.get('GMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_APP_PASSWORD')
-DEFAULT_FROM_EMAIL = os.environ.get('GMAIL_USER', 'noreply@jysenglishacademy.com')
+EMAIL_TIMEOUT = 10
+EMAIL_HOST_USER = f"postmaster@{os.environ.get('MAILGUN_DOMAIN')}"
+EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_API_KEY')
+DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL', 'noreply@jysenglishacademy.com')
 
 # Login settings
 LOGIN_URL = '/login/'
