@@ -41,9 +41,11 @@ Mensaje:
                 ['martinver163@gmail.com'],
                 fail_silently=False,
             )
-            return HttpResponse("¡Mensaje enviado exitosamente! Te responderemos a la brevedad.")
+            messages.success(request, '¡Mensaje enviado exitosamente! Te responderemos a la brevedad.')
+            return redirect('index')
         except Exception as e:
-            return HttpResponse("Error al enviar el mensaje. Por favor, intenta nuevamente.")
+            messages.error(request, 'Error al enviar el mensaje. Por favor, intenta nuevamente.')
+            return redirect('index')
     
     return render(request, 'agency/index.html')
 
