@@ -82,15 +82,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email settings - SendGrid optimizado para producción
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_TIMEOUT = 5  # Timeout corto para evitar worker timeout
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY')
-DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL', 'noreply@jysenglishacademy.com')
+# Email settings - SendGrid Web API
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+DEFAULT_FROM_EMAIL = os.environ.get('FROM_EMAIL', 'martinver163@gmail.com')
 
 # Login settings
 LOGIN_URL = '/login/'

@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -8,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db import models
 from .models import Alumno, Curso, Material, Aviso, Nota, MensajeProgramado
+from .email_utils import send_email_sendgrid
 
 def index(request):
     if request.method == 'POST':
@@ -32,29 +32,24 @@ Mensaje:
 {message}
 """
         
-        # Enviar email en background para evitar timeout
+        # Enviar email usando SendGrid Web API
         try:
             from threading import Thread
             
             def send_email_async():
-                try:
-                    send_mail(
-                        subject,
-                        email_message,
-                        settings.DEFAULT_FROM_EMAIL,
-                        ['martinver163@gmail.com'],
-                        fail_silently=True,
-                    )
-                except:
-                    pass  # Fallar silenciosamente
+                send_email_sendgrid(
+                    subject=subject,
+                    message=email_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to_emails=['martinver163@gmail.com']
+                )
             
-            # Ejecutar en hilo separado
+            # Ejecutar en hilo separado para evitar timeout
             Thread(target=send_email_async, daemon=True).start()
             
-        except:
-            pass  # Si falla el threading, continuar
+        except Exception as e:
+            pass  # Fallar silenciosamente
         
-        # Siempre mostrar éxito para mejor UX
         messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
         return redirect('index')
     
