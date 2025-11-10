@@ -80,14 +80,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email settings - Gmail (funciona 100%)
+# Email settings - Gmail con timeout optimizado
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('GMAIL_USER', 'martinver163@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_APP_PASSWORD', 'hizt btma rtya jpws')
-DEFAULT_FROM_EMAIL = os.environ.get('GMAIL_USER', 'martinver163@gmail.com')
+EMAIL_TIMEOUT = 10  # Timeout de 10 segundos
+EMAIL_HOST_USER = os.environ.get('GMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('GMAIL_APP_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('GMAIL_USER', 'noreply@jysenglishacademy.com')
 
 # Login settings
 LOGIN_URL = '/login/'
