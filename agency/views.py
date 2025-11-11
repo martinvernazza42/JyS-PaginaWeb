@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -9,7 +9,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from .models import Alumno, Curso, Material, Aviso, Nota, MensajeProgramado
 from .email_utils import send_email_sendgrid
-from .validators import validar_solo_letras
+from .validators import validar_solo_letras, validar_telefono_15_digitos
 
 def index(request):
     if request.method == 'POST':
@@ -22,13 +22,25 @@ def index(request):
         
         # Validaciones
         try:
+            # Validar campos obligatorios
+            if not name or not name.strip():
+                messages.error(request, 'El nombre es obligatorio.')
+                return HttpResponseRedirect('/#contact')
+            
+            if not phone or not phone.strip():
+                messages.error(request, 'El teléfono es obligatorio.')
+                return HttpResponseRedirect('/#contact')
+            
             # Validar que el nombre solo contenga letras y espacios
-            validar_solo_letras(name)
+            validar_solo_letras(name.strip())
+            
+            # Validar que el teléfono solo contenga números
+            validar_telefono_15_digitos(phone.strip())
             
             # Validar que se haya seleccionado un curso
             if not course:
                 messages.error(request, 'Debes seleccionar un curso de interés.')
-                return redirect('index')
+                return HttpResponseRedirect('/#contact')
             
             # Crear el contenido del correo
             subject = f'Nueva consulta de {name}'
@@ -44,14 +56,33 @@ Mensaje:
 {message}
 """
             
-            # Responder inmediatamente sin enviar email para evitar 502
-            # TODO: Implementar cola de emails para producción
-            messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
-            return redirect('index')
+            # Enviar email
+            email_sent = send_email_sendgrid(
+                subject=subject,
+                message=email_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to_emails=[settings.DEFAULT_FROM_EMAIL]
+            )
             
-        except ValidationError:
-            messages.error(request, 'El nombre solo puede contener letras y espacios.')
-            return redirect('index')
+            if email_sent:
+                messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
+            else:
+                messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
+            
+            return HttpResponseRedirect('/#contact')
+            
+        except ValidationError as e:
+            error_msg = str(e)
+            if 'solo puede contener letras y espacios' in error_msg:
+                messages.error(request, 'El nombre solo puede contener letras y espacios.')
+            elif 'debe contener entre 10 y 15 números' in error_msg:
+                messages.error(request, 'El teléfono debe contener solo números (entre 10 y 15 dígitos).')
+            else:
+                messages.error(request, 'Error en los datos ingresados. Por favor, verifica la información.')
+            return HttpResponseRedirect('/#contact')
+        except Exception as e:
+            messages.error(request, 'Ocurrió un error al procesar tu consulta. Por favor, inténtalo nuevamente.')
+            return HttpResponseRedirect('/#contact')
     
     return render(request, 'agency/index.html')
 

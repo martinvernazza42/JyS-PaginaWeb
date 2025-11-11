@@ -58,18 +58,7 @@
             </div>
         </nav>
         
-        <!-- Messages -->
-        {% if messages %}
-            <div class="container" style="position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 90%; max-width: 500px;">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
-                        <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% else %}info-circle{% endif %} me-2"></i>
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+
         
         <!-- Masthead-->
         <header class="masthead">
@@ -216,76 +205,76 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
-                        <div class="card h-100 shadow-sm border-0">
-                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/kids.jpeg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                        <div class="card h-100 shadow-sm border-0 course-card" style="transition: all 0.3s ease; cursor: pointer; overflow: hidden;">
+                            <img class="card-img-top course-img" src="{% static 'agency/assets/img/portfolio/kids.jpeg' %}" alt="..." style="height: 180px; object-fit: cover; transition: all 0.3s ease;" />
                             <div class="card-body p-3">
-                                <h6 class="card-title">Cursos para Niños (Kids English)</h6>
+                                <h6 class="card-title course-title">Cursos para Niños (Kids English)</h6>
                                 <p class="card-text text-muted small mb-2"><strong>Edad:</strong> desde los 5 años<br>
                                 <strong>Modalidad:</strong> Presencial / Online<br>
                                 <strong>Grupos:</strong> 8-9 alumnos</p>
                                 <p class="card-text small">Clases dinámicas con juegos, canciones y actividades que estimulan el aprendizaje natural del idioma.</p>
-                                <a href="#contact" class="btn btn-primary btn-sm">Descubrí cómo aprenden jugando</a>
+                                <a href="#contact" class="btn btn-primary btn-sm course-btn">Descubrí cómo aprenden jugando</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
-                        <div class="card h-100 shadow-sm border-0">
-                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/teenagers.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                        <div class="card h-100 shadow-sm border-0 course-card" style="transition: all 0.3s ease; cursor: pointer; overflow: hidden;">
+                            <img class="card-img-top course-img" src="{% static 'agency/assets/img/portfolio/teenagers.jpg' %}" alt="..." style="height: 180px; object-fit: cover; transition: all 0.3s ease;" />
                             <div class="card-body p-3">
-                                <h6 class="card-title">Cursos para Adolescentes (Teens English)</h6>
+                                <h6 class="card-title course-title">Cursos para Adolescentes (Teens English)</h6>
                                 <p class="card-text text-muted small mb-2"><strong>Edad:</strong> de 12 a 17 años<br>
                                 <strong>Modalidad:</strong> Presencial / Online<br>
                                 <strong>Grupos:</strong> 8-9 alumnos</p>
                                 <p class="card-text small">Clases enfocadas en comunicación real, adaptadas a los intereses de los adolescentes.</p>
-                                <a href="#contact" class="btn btn-primary btn-sm">Inscribite y hablá inglés con confianza</a>
+                                <a href="#contact" class="btn btn-primary btn-sm course-btn">Inscribite y hablá inglés con confianza</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
-                        <div class="card h-100 shadow-sm border-0">
-                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/adults.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                        <div class="card h-100 shadow-sm border-0 course-card" style="transition: all 0.3s ease; cursor: pointer; overflow: hidden;">
+                            <img class="card-img-top course-img" src="{% static 'agency/assets/img/portfolio/adults.jpg' %}" alt="..." style="height: 180px; object-fit: cover; transition: all 0.3s ease;" />
                             <div class="card-body p-3">
-                                <h6 class="card-title">Cursos para Adultos (Adults English)</h6>
+                                <h6 class="card-title course-title">Cursos para Adultos (Adults English)</h6>
                                 <p class="card-text text-muted small mb-2"><strong>Modalidad:</strong> Presencial / Online<br>
                                 <strong>Grupos:</strong> Reducidos (8-9 alumnos)</p>
                                 <p class="card-text small">Ideal para quienes desean retomar el inglés, viajar, o mejorar su desempeño profesional.</p>
-                                <a href="#contact" class="btn btn-primary btn-sm">Aprendé inglés útil para tu vida y trabajo</a>
+                                <a href="#contact" class="btn btn-primary btn-sm course-btn">Aprendé inglés útil para tu vida y trabajo</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
-                        <div class="card h-100 shadow-sm border-0">
-                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/empresas.webp' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                        <div class="card h-100 shadow-sm border-0 course-card" style="transition: all 0.3s ease; cursor: pointer; overflow: hidden;">
+                            <img class="card-img-top course-img" src="{% static 'agency/assets/img/portfolio/empresas.webp' %}" alt="..." style="height: 180px; object-fit: cover; transition: all 0.3s ease;" />
                             <div class="card-body p-3">
-                                <h6 class="card-title">Inglés para Empresas (Business English)</h6>
+                                <h6 class="card-title course-title">Inglés para Empresas (Business English)</h6>
                                 <p class="card-text text-muted small mb-2"><strong>Modalidad:</strong> Presencial / Online</p>
                                 <p class="card-text small">Entrenamiento lingüístico personalizado para equipos de trabajo.</p>
-                                <a href="#contact" class="btn btn-primary btn-sm">Capacitá a tu equipo en inglés profesional</a>
+                                <a href="#contact" class="btn btn-primary btn-sm course-btn">Capacitá a tu equipo en inglés profesional</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
-                        <div class="card h-100 shadow-sm border-0">
-                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/itensivo.jpg' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                        <div class="card h-100 shadow-sm border-0 course-card" style="transition: all 0.3s ease; cursor: pointer; overflow: hidden;">
+                            <img class="card-img-top course-img" src="{% static 'agency/assets/img/portfolio/itensivo.jpg' %}" alt="..." style="height: 180px; object-fit: cover; transition: all 0.3s ease;" />
                             <div class="card-body p-3">
-                                <h6 class="card-title">Cursos Intensivos</h6>
+                                <h6 class="card-title course-title">Cursos Intensivos</h6>
                                 <p class="card-text text-muted small mb-2"><strong>Duración:</strong> corta (1 a 3 meses)<br>
                                 <strong>Modalidad:</strong> Presencial / Online</p>
                                 <p class="card-text small">Programas acelerados para quienes necesitan resultados rápidos.</p>
-                                <a href="#contact" class="btn btn-primary btn-sm">Mejorá tu nivel en tiempo récord</a>
+                                <a href="#contact" class="btn btn-primary btn-sm course-btn">Mejorá tu nivel en tiempo récord</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 mb-3">
-                        <div class="card h-100 shadow-sm border-0">
-                            <img class="card-img-top" src="{% static 'agency/assets/img/portfolio/international.png' %}" alt="..." style="height: 180px; object-fit: cover;" />
+                        <div class="card h-100 shadow-sm border-0 course-card" style="transition: all 0.3s ease; cursor: pointer; overflow: hidden;">
+                            <img class="card-img-top course-img" src="{% static 'agency/assets/img/portfolio/international.png' %}" alt="..." style="height: 180px; object-fit: cover; transition: all 0.3s ease;" />
                             <div class="card-body p-3">
-                                <h6 class="card-title">Preparación para Exámenes Internacionales</h6>
+                                <h6 class="card-title course-title">Preparación para Exámenes Internacionales</h6>
                                 <p class="card-text text-muted small mb-2"><strong>Exámenes:</strong> Cambridge, TOEFL, IELTS, Trinity</p>
                                 <p class="card-text small">Clases enfocadas en estrategias de examen con alto porcentaje de aprobados.</p>
-                                <a href="#contact" class="btn btn-primary btn-sm">Preparate para certificar tu nivel de inglés</a>
+                                <a href="#contact" class="btn btn-primary btn-sm course-btn">Preparate para certificar tu nivel de inglés</a>
                             </div>
                         </div>
                     </div>
@@ -462,10 +451,10 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-lg-6 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
+                        <div class="card h-100 shadow-sm border-0 exam-card" style="transition: all 0.3s ease; cursor: pointer;">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-graduation-cap fa-2x text-primary me-3"></i>
+                                    <i class="fas fa-graduation-cap fa-2x text-primary me-3 exam-icon" style="transition: all 0.3s ease;"></i>
                                     <h5 class="card-title mb-0">Cambridge English (KET, PET, FCE, CAE, CPE)</h5>
                                 </div>
                                 <p class="card-text text-muted">Ideales para certificar distintos niveles de dominio del idioma según el Marco Común Europeo (A2 a C2). Estos exámenes evalúan comprensión lectora, auditiva, escritura y expresión oral. Perfectos para estudiantes, docentes y profesionales que buscan una acreditación oficial y permanente.</p>
@@ -473,10 +462,10 @@
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
+                        <div class="card h-100 shadow-sm border-0 exam-card" style="transition: all 0.3s ease; cursor: pointer;">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-globe-americas fa-2x text-primary me-3"></i>
+                                    <i class="fas fa-globe-americas fa-2x text-primary me-3 exam-icon" style="transition: all 0.3s ease;"></i>
                                     <h5 class="card-title mb-0">TOEFL (Test of English as a Foreign Language)</h5>
                                 </div>
                                 <p class="card-text text-muted">Reconocido por universidades y empresas internacionales. Mide la capacidad para usar y comprender inglés académico en contextos reales. Ideal para quienes desean estudiar o trabajar en el exterior.</p>
@@ -484,10 +473,10 @@
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
+                        <div class="card h-100 shadow-sm border-0 exam-card" style="transition: all 0.3s ease; cursor: pointer;">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-award fa-2x text-primary me-3"></i>
+                                    <i class="fas fa-award fa-2x text-primary me-3 exam-icon" style="transition: all 0.3s ease;"></i>
                                     <h5 class="card-title mb-0">IELTS (International English Language Testing System)</h5>
                                 </div>
                                 <p class="card-text text-muted">Evaluación global aceptada por más de 10.000 instituciones. Mide la comunicación en inglés en contextos académicos, laborales y migratorios. Disponible en versiones Academic y General Training.</p>
@@ -495,10 +484,10 @@
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
+                        <div class="card h-100 shadow-sm border-0 exam-card" style="transition: all 0.3s ease; cursor: pointer;">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-certificate fa-2x text-primary me-3"></i>
+                                    <i class="fas fa-certificate fa-2x text-primary me-3 exam-icon" style="transition: all 0.3s ease;"></i>
                                     <h5 class="card-title mb-0">Trinity College London</h5>
                                 </div>
                                 <p class="card-text text-muted">Enfocado en comunicación oral y habilidades prácticas. Sus exámenes (GESE e ISE) priorizan la interacción y la expresión oral, siendo una excelente opción para quienes buscan confianza al hablar.</p>
@@ -588,6 +577,16 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
+                        <!-- Messages -->
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-dismissible fade show mb-4" role="alert" style="{% if message.tags == 'success' %}background-color: rgba(40, 167, 69, 0.1); border: 1px solid rgba(40, 167, 69, 0.3); color: #155724;{% elif message.tags == 'error' %}background-color: rgba(220, 53, 69, 0.1); border: 1px solid rgba(220, 53, 69, 0.3); color: #721c24;{% else %}background-color: rgba(23, 162, 184, 0.1); border: 1px solid rgba(23, 162, 184, 0.3); color: #0c5460;{% endif %} border-radius: 10px;">
+                                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% else %}info-circle{% endif %} me-2"></i>
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" style="filter: {% if message.tags == 'success' %}hue-rotate(120deg){% elif message.tags == 'error' %}hue-rotate(0deg){% else %}hue-rotate(180deg){% endif %};"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         <div class="bg-white p-5 rounded-3 shadow-lg">
                             <form id="contactForm" method="post">
                                 {% csrf_token %}
@@ -659,5 +658,46 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{% static 'agency/js/scripts.js' %}"></script>
+        
+        <style>
+            .exam-card:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
+                border: 2px solid #843044 !important;
+            }
+            
+            .exam-card:hover .exam-icon {
+                transform: rotate(10deg) scale(1.1);
+                color: #843044 !important;
+            }
+            
+            .exam-card:hover .card-title {
+                color: #843044 !important;
+            }
+            
+            .course-card:hover {
+                transform: translateY(-10px) scale(1.03);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+                border: 2px solid #FFD54F !important;
+            }
+            
+            .course-card:hover .course-img {
+                transform: scale(1.1);
+                filter: brightness(1.1) contrast(1.1);
+            }
+            
+            .course-card:hover .course-title {
+                color: #843044 !important;
+                transform: translateX(5px);
+            }
+            
+            .course-card:hover .course-btn {
+                background-color: #FFD54F !important;
+                border-color: #FFD54F !important;
+                color: #000 !important;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(255, 213, 79, 0.4);
+            }
+        </style>
     </body>
 </html>
