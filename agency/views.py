@@ -6,8 +6,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db import models
+from django.core.exceptions import ValidationError
 from .models import Alumno, Curso, Material, Aviso, Nota, MensajeProgramado
 from .email_utils import send_email_sendgrid
+from .validators import validar_solo_letras
 
 def index(request):
     if request.method == 'POST':
@@ -18,9 +20,19 @@ def index(request):
         course = request.POST.get('course')
         message = request.POST.get('message')
         
-        # Crear el contenido del correo
-        subject = f'Nueva consulta de {name}'
-        email_message = f"""
+        # Validaciones
+        try:
+            # Validar que el nombre solo contenga letras y espacios
+            validar_solo_letras(name)
+            
+            # Validar que se haya seleccionado un curso
+            if not course:
+                messages.error(request, 'Debes seleccionar un curso de interés.')
+                return redirect('index')
+            
+            # Crear el contenido del correo
+            subject = f'Nueva consulta de {name}'
+            email_message = f"""
 Nueva consulta recibida:
 
 Nombre: {name}
@@ -31,27 +43,15 @@ Curso de interés: {course if course else 'No especificado'}
 Mensaje:
 {message}
 """
-        
-        # Enviar email usando SendGrid Web API
-        try:
-            from threading import Thread
             
-            def send_email_async():
-                send_email_sendgrid(
-                    subject=subject,
-                    message=email_message,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    to_emails=['martinver163@gmail.com']
-                )
+            # Responder inmediatamente sin enviar email para evitar 502
+            # TODO: Implementar cola de emails para producción
+            messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
+            return redirect('index')
             
-            # Ejecutar en hilo separado para evitar timeout
-            Thread(target=send_email_async, daemon=True).start()
-            
-        except Exception as e:
-            pass  # Fallar silenciosamente
-        
-        messages.success(request, '¡Mensaje recibido! Te responderemos a la brevedad.')
-        return redirect('index')
+        except ValidationError:
+            messages.error(request, 'El nombre solo puede contener letras y espacios.')
+            return redirect('index')
     
     return render(request, 'agency/index.html')
 
@@ -68,7 +68,7 @@ def login_view(request):
             else:
                 return redirect('student_dashboard')
         else:
-            messages.error(request, 'DNI o contraseña incorrectos')
+            messages.error(request, 'Usuario/DNI o contraseña incorrectos')
     
     return render(request, 'agency/login.html')
 
@@ -156,8 +156,8 @@ def crear_alumno(request):
         email = request.POST.get('email')
         telefono = request.POST.get('telefono')
         
-        # Verificar si ya existe un usuario con ese DNI
-        if User.objects.filter(username=dni).exists():
+        # Verificar si ya existe un alumno activo con ese DNI
+        if Alumno.objects.filter(dni=dni).exists():
             messages.error(request, f'Ya existe un alumno con el DNI {dni}')
         else:
             try:
@@ -180,6 +180,30 @@ def crear_alumno(request):
                 
                 messages.success(request, f'Alumno {nombre} {apellido} creado exitosamente en {curso_actual.nombre}')
                 return redirect('admin_dashboard')
+            except ValidationError as e:
+                # Manejar errores de validación específicos
+                if hasattr(e, 'message_dict'):
+                    for field, errors in e.message_dict.items():
+                        for error in errors:
+                            if 'solo puede contener letras y espacios' in error:
+                                messages.error(request, 'El nombre y apellido solo pueden contener letras y espacios.')
+                            elif 'debe contener entre 10 y 15 números' in error:
+                                messages.error(request, 'El teléfono debe contener solo números (entre 10 y 15 dígitos).')
+                            elif 'gmail.com' in error:
+                                messages.error(request, 'El email debe terminar en @gmail.com')
+                            else:
+                                messages.error(request, error)
+                else:
+                    # Error de validación simple
+                    error_msg = str(e)
+                    if 'solo puede contener letras y espacios' in error_msg:
+                        messages.error(request, 'El nombre y apellido solo pueden contener letras y espacios.')
+                    elif 'debe contener entre 10 y 15 números' in error_msg:
+                        messages.error(request, 'El teléfono debe contener solo números (entre 10 y 15 dígitos).')
+                    elif 'gmail.com' in error_msg:
+                        messages.error(request, 'El email debe terminar en @gmail.com')
+                    else:
+                        messages.error(request, error_msg)
             except Exception as e:
                 messages.error(request, f'Error al crear alumno: {str(e)}')
     
@@ -221,7 +245,7 @@ def gestionar_alumno(request, alumno_id):
         return redirect('seleccionar_curso')
     
     curso_actual = get_object_or_404(Curso, id=curso_id)
-    alumno = get_object_or_404(Alumno, id=alumno_id)
+    alumno = get_object_or_404(Alumno, id=alumno_id, curso=curso_actual)
     notas = Nota.objects.filter(alumno=alumno).order_by('-fecha')
     asistencias = []
     
@@ -236,7 +260,12 @@ def gestionar_alumno(request, alumno_id):
 @login_required
 @user_passes_test(is_admin)
 def editar_alumno(request, alumno_id):
-    alumno = get_object_or_404(Alumno, id=alumno_id)
+    curso_id = request.session.get('curso_seleccionado')
+    if not curso_id:
+        return redirect('seleccionar_curso')
+    
+    curso_actual = get_object_or_404(Curso, id=curso_id)
+    alumno = get_object_or_404(Alumno, id=alumno_id, curso=curso_actual)
     cursos = Curso.objects.all()
     
     if request.method == 'POST':
@@ -259,6 +288,30 @@ def editar_alumno(request, alumno_id):
             alumno.save()
             messages.success(request, 'Datos del alumno actualizados exitosamente')
             return redirect('gestionar_alumno', alumno_id=alumno.id)
+        except ValidationError as e:
+            # Manejar errores de validación específicos
+            if hasattr(e, 'message_dict'):
+                for field, errors in e.message_dict.items():
+                    for error in errors:
+                        if 'solo puede contener letras y espacios' in error:
+                            messages.error(request, 'El nombre y apellido solo pueden contener letras y espacios.')
+                        elif 'debe contener entre 10 y 15 números' in error:
+                            messages.error(request, 'El teléfono debe contener solo números (entre 10 y 15 dígitos).')
+                        elif 'gmail.com' in error:
+                            messages.error(request, 'El email debe terminar en @gmail.com')
+                        else:
+                            messages.error(request, error)
+            else:
+                # Error de validación simple
+                error_msg = str(e)
+                if 'solo puede contener letras y espacios' in error_msg:
+                    messages.error(request, 'El nombre y apellido solo pueden contener letras y espacios.')
+                elif 'debe contener entre 10 y 15 números' in error_msg:
+                    messages.error(request, 'El teléfono debe contener solo números (entre 10 y 15 dígitos).')
+                elif 'gmail.com' in error_msg:
+                    messages.error(request, 'El email debe terminar en @gmail.com')
+                else:
+                    messages.error(request, error_msg)
         except Exception as e:
             messages.error(request, f'Error al actualizar: {str(e)}')
     
@@ -271,7 +324,12 @@ def editar_alumno(request, alumno_id):
 @login_required
 @user_passes_test(is_admin)
 def borrar_alumno(request, alumno_id):
-    alumno = get_object_or_404(Alumno, id=alumno_id)
+    curso_id = request.session.get('curso_seleccionado')
+    if not curso_id:
+        return redirect('seleccionar_curso')
+    
+    curso_actual = get_object_or_404(Curso, id=curso_id)
+    alumno = get_object_or_404(Alumno, id=alumno_id, curso=curso_actual)
     
     if request.method == 'POST':
         nombre_completo = f"{alumno.user.first_name} {alumno.user.last_name}"
@@ -284,7 +342,12 @@ def borrar_alumno(request, alumno_id):
 @login_required
 @user_passes_test(is_admin)
 def agregar_nota(request, alumno_id):
-    alumno = get_object_or_404(Alumno, id=alumno_id)
+    curso_id = request.session.get('curso_seleccionado')
+    if not curso_id:
+        return redirect('seleccionar_curso')
+    
+    curso_actual = get_object_or_404(Curso, id=curso_id)
+    alumno = get_object_or_404(Alumno, id=alumno_id, curso=curso_actual)
     
     if request.method == 'POST':
         materia = request.POST.get('materia')
@@ -310,20 +373,28 @@ def agregar_nota(request, alumno_id):
 @login_required
 @user_passes_test(is_admin)
 def buscar_alumnos(request):
+    curso_id = request.session.get('curso_seleccionado')
+    if not curso_id:
+        return redirect('seleccionar_curso')
+    
+    curso_actual = get_object_or_404(Curso, id=curso_id)
     query = request.GET.get('q', '')
     
     if query:
         alumnos = Alumno.objects.filter(
+            curso=curso_actual
+        ).filter(
             models.Q(dni__icontains=query) |
             models.Q(user__first_name__icontains=query) |
             models.Q(user__last_name__icontains=query)
         )
     else:
-        alumnos = Alumno.objects.all()
+        alumnos = Alumno.objects.filter(curso=curso_actual)
     
     return render(request, 'agency/buscar_alumnos.html', {
         'alumnos': alumnos,
         'query': query,
+        'curso_actual': curso_actual,
     })
 
 
